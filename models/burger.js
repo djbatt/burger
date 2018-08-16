@@ -6,13 +6,13 @@ var burger = {
             cb(res);
         })
     },
-    create: function(cb) {
-        orm.insertOne("burgers", function(res) {
+    create: function(burgerValue, cb) {
+        orm.insertOne("burgers", "burger_name", burgerValue, function(res) {
             cb(res);
         })
     },
-    update: function(cb) {
-        orm.updateOne("burgers", function(res) {
+    update: function(condition, cb) {
+        orm.updateOne("burgers", "devoured", condition, function(res) {
             cb(res);
         })
     }

@@ -1,24 +1,24 @@
 var connection = require("../config/connection.js");
 
 var orm = {
-    selectAll: function() { // retrieve all burgers on page load, and on insert One
-        connection.query("SELECT * FROM burgers", function(err, result) {
+    selectAll: function(table, cb) { // retrieve all burgers on page load, and on insert One
+        connection.query(`SELECT * FROM ${table}`, function(err, result) {
             if (err) throw err;
-            res.json(result);
+            cb(result);
         })
 
     },
-    insertOne: function(burgerName) { //insert a burger with a default false devoured
-        connection.query(`INSERT INTO burgers VALUES (burger_name) VALUES ?`, [burgerName], function(err, result) {
+    insertOne: function(table, colVal, burgerName, cb) { //insert a burger with a default false devoured
+        connection.query(`INSERT INTO ${table} (${colVal}) VALUES (${burgerName})`, function(err, result) {
             if (err) throw err;
-            res.json(result);
+            cb(result);
         })
 
     }, //update the devoured to true when its devoured
-    updateOne: function(id) {
-        connection.query("UPDATE burgers SET devoured = 1 WHERE id = ?", [id], function(err, result) {
+    updateOne: function(table, colVal, condition, cb) {
+        connection.query(`UPDATE ${table} SET ${colVal} = 1 WHERE ${condition}`, function(err, result) {
             if (err) throw err;
-            res.json(result);
+            cb(result);
         })
     }
 }

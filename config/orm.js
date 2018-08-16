@@ -9,7 +9,7 @@ var orm = {
 
     },
     insertOne: function(table, colVal, burgerName, cb) { //insert a burger with a default false devoured
-        connection.query(`INSERT INTO ${table} (${colVal}) VALUES (${burgerName})`, function(err, result) {
+        connection.query(`INSERT INTO ${table} (${colVal}) VALUES (?)`, [burgerName], function(err, result) {
             if (err) throw err;
             cb(result);
         })

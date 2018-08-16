@@ -13,6 +13,7 @@ router.get("/", function(req, res) {
 });
 
 router.post("/api/burgers", function(req, res) {
+    console.log(req.body.burger_name);
     burger.create(req.body.burger_name, function(data) {
         res.redirect("/");
     });

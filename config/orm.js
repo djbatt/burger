@@ -15,8 +15,11 @@ var orm = {
         })
 
     }, //update the devoured to true when its devoured
-    updateOne: function() {
-        connection.query("UPDATE burgers SET devoured = 1 WHERE ?")
+    updateOne: function(id) {
+        connection.query("UPDATE burgers SET devoured = 1 WHERE id = ?", [id], function(err, result) {
+            if (err) throw err;
+            res.json(result);
+        })
     }
 }
 
